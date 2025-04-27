@@ -3,142 +3,241 @@ import Layout from '@layouts/Layout.astro';
 import Hero from '@components/sections/Hero.astro';
 import SplitPanel from '@components/sections/SplitPanel.astro';
 import Features from '@components/sections/Features.astro';
-import Stats from '@components/sections/Stats.astro';
 import { featureLists } from '@data/features';
-import { statsLists } from '@data/stats';
-import Logos from '@components/sections/Logos.astro';
-import { logoLists } from '@data/logos';
 import CtaBanner from '@components/sections/CtaBanner.astro';
 import Faqs from '@components/sections/Faqs.astro';
 import { faqLists } from '@data/faqs';
-import RecentPosts from '@components/sections/RecentPosts.astro';
+import Logos from '@components/sections/Logos.astro';
+import { logoLists } from '@data/logos';
+// images
 import heroImage from '../assets/images/home/default-hero-2.jpg';
-import styleGuideImage from '../assets/images/home/developer.jpg';
+import nylamid from '../assets/images/home/m-nylamid.jpeg';
+import bronce from '../assets/images/home/m-bronce.webp';
+import acero4140 from '../assets/images/home/m-acerp4140.jpg';
+import aceroD2A2 from '../assets/images/home/m-acer0d2a2.webp';
+import aceroInox from '../assets/images/home/m-acero-inox.jpeg';
+import delrin from '../assets/images/home/m-delrin.jpg';
+import img1 from '../assets/images/home/img-1.png';
+import img2 from '../assets/images/home/img-2.png';
+import img3 from '../assets/images/home/img-3.png';
+import img4 from '../assets/images/home/img-4.png';
+import img5 from '../assets/images/home/img-5.png';
+import img6 from '../assets/images/home/img-6.png';
+import img7 from '../assets/images/home/img-7.png';
+import img8 from '../assets/images/home/img-8.png';
+import devWeb from '../assets/images/home/dev-web.jpg';
+import api from '../assets/images/home/api.jpg';
+import db from '../assets/images/home/db.jpg';
+import scada from '../assets/images/home/scada.png';
+import soporte from '../assets/images/home/soporte.png';
+import software from '../assets/images/home/software.png';
 
-const seoTitle = "Modern, High-Performance Astro Theme";
-const seoDescription = "A modern, high-performance Astro theme for developer portfolios and documentation sites.";
+const seoTitle = 'ART Services';
+const seoDescription =
+    'Empresa especializada en maquinados de alta precisión, servicios industriales y soluciones de IT a la medida para optimizar tus procesos y proyectos.';
 
 const heroContent = {
-    title: 'The Foundation for Beautiful Astro JS Websites',
-    description: 'Titan Core is a minimal, performance-focused Astro JS theme that serves as the perfect foundation for your next web project. Built with clean code and modern best practices, it\'s designed to be extended and customized to your specific needs.',
+    title: 'Maquinados, Servicios Industriales e IT a la Medida',
+    description:
+        'Fundada en 2023, somos especialistas en servicios industriales como soldadura, maquinados, diseño, integraciones, soporte informático y más. Trabajamos con materiales de alta calidad como Nylamid, Bronce, Acero 4140, Acero D2/A2, Inoxidable y Delrin, ofreciendo desde piezas especializadas hasta estaciones de trabajo completas.',
     buttons: [
         {
-            text: 'Get Started',
+            text: 'Contáctanos',
             link: '/contact',
-            target: '_self'
+            target: '_self',
         },
         {
-            text: 'View on GitHub',
-            link: 'https://github.com/rspisarski/titan-core',
-            target: '_blank'
-        }
+            text: 'Conoce Más',
+            link: '/servicios',
+            target: '_self',
+        },
     ],
     backgroundImage: heroImage,
-    overlayOpacity: 0.2
-}
-
-const featuresSection = {
-    eyebrow: "CORE FEATURES",
-    title: "Everything You Need, Nothing You Don't",
-    description: "Titan Core gives you a solid foundation with essential features while staying lightweight and customizable. Start with a clean slate and build exactly what you need without the bloat.",
-    features: featureLists.main.features,
-    button: {
-        text: "View Theme Info",
-        link: "/theme-info",
-        variant: "primary" as const
-    }
-}
+    overlayOpacity: 0.5,
+};
 
 const FooterCta = {
-    eyebrow: "Join The Community",
+    eyebrow: 'Join The Community',
     title: ' Start Building With Titan Core Today',
-    description: 'Titan Core is open-source and constantly improving. Join our community of developers to contribute, get support, or showcase what you\'ve built.',
+    description:
+        "Titan Core is open-source and constantly improving. Join our community of developers to contribute, get support, or showcase what you've built.",
     hideCta: false,
     button: {
         text: 'Download Titan Core',
         link: 'https://github.com/rspisarski/titan-core',
-        target: '_blank'
-    }
-}
-
-const styleGuideSection = {
-    eyebrow: "Design System",
-    headline: "Consistent & Beautiful Components",
-    description: "Titan Core comes with a complete style guide to ensure your projects maintain visual consistency. From typography to interactive elements, we've carefully crafted each component.",
-    image: {
-        src: styleGuideImage,
-        alt: "Featured image"
+        target: '_blank',
     },
+};
+
+const offerSection = {
+    eyebrow: 'NUESTROS SERVICIOS',
+    title: 'Soluciones Industriales y Tecnológicas a tu Medida',
+    description:
+        'Ofrecemos soluciones especializadas que se adaptan a las necesidades específicas de cada empresa. Desde maquinados de alta precisión hasta soporte técnico de IT, nuestro compromiso es impulsar tu productividad con servicios de calidad, confiabilidad y eficiencia.',
+    features: featureLists.main.features,
+    button: {
+        text: 'Descubre Más',
+        link: '/services',
+        variant: 'primary' as const,
+    },
+};
+
+const plotServices = {
+    eyebrow: 'Servicios de Maquinado',
+    headline: 'Especialistas en Materiales Industriales',
+    subheadline: 'Precisión y calidad garantizada',
+    description:
+        'Realizamos todo tipo de trabajos en diferentes materiales industriales, con la máxima precisión y tiempos de entrega competitivos.',
+    materialList: ['Nylamid', 'Bronce', 'Acero 4140', 'Acero D2 / A2', 'Inoxidable', 'Delrin'],
+    images: [
+        { src: nylamid, alt: 'Maquinado Nylamid', colSpan: 1, rowSpan: 1 },
+        { src: bronce, alt: 'Maquinado Bronce', colSpan: 1, rowSpan: 1 },
+        { src: acero4140, alt: 'Maquinado acero 4140', colSpan: 2, rowSpan: 1 },
+        { src: aceroD2A2, alt: 'Maquinado acero d2a2', colSpan: 1, rowSpan: 2 },
+        { src: aceroInox, alt: 'Maquinado acero inoxidable', colSpan: 2, rowSpan: 1 },
+        { src: delrin, alt: 'Maquinado delrin', colSpan: 1, rowSpan: 1 },
+    ],
     buttons: [
         {
-            text: "Explore Style Guide",
-            link: "/style-guide",
-            variant: "primary" as const
-        }
-    ]
-}
+            text: 'Solicitar Cotización',
+            link: '/contact',
+            variant: 'primary' as 'primary' | 'secondary' | 'ghostLight' | 'ghostDark',
+        },
+    ],
+};
 
-const sideBySideStats = {
-    eyebrow: "Stats",
-    title: "Built for Speed and Flexibility",
-    description: "Titan Core is designed with performance and developer experience in mind. Our lightweight theme gives you all the essentials without the bloat, letting you build exactly what you need with impressive speed.",
-    variant: 'side-by-side' as const,
-    stats: statsLists.withContent.stats,
-    content: {
-        title: "Built for Speed and Flexibility",
-        description: "Titan Core is designed with performance and developer experience in mind. Our lightweight theme gives you all the essentials without the bloat, letting you build exactly what you need with impressive speed.",
-        button: {
-            text: "Discover Titan Core",
-            link: "/theme-info",
-            variant: "primary" as const
-        }
-    }
+const designServices = {
+    eyebrow: 'Servicios Especializados',
+    headline: 'Desarrollo y Fabricación de Soluciones Funcionales',
+    subheadline: 'Innovación, calidad y precisión en cada proyecto',
+    description:
+        'Ofrecemos el diseño y fabricación de estaciones de trabajo, estructuras de soporte, piezas especializadas y pruebas funcionales para asegurar el rendimiento y la eficiencia de tus procesos industriales. Nos adaptamos a tus requerimientos técnicos y productivos, garantizando soluciones a medida con los más altos estándares de calidad.',
+    serviceList: ['Pruebas funcionales', 'Estaciones de trabajo', 'Piezas especializadas', 'Estructuras de soporte'],
+    images: [
+        { src: img1, alt: 'Pruebas funcionales', colSpan: 2, rowSpan: 2 },
+        { src: img2, alt: 'Estaciones de trabajo', colSpan: 1, rowSpan: 1 },
+        { src: img3, alt: 'Piezas especializadas', colSpan: 2, rowSpan: 1 },
+        { src: img4, alt: 'Estructuras de soporte', colSpan: 1, rowSpan: 2 },
+        { src: img5, alt: 'Otros', colSpan: 2, rowSpan: 1 },
+    ],
+    buttons: [
+        {
+            text: 'Solicitar Asesoría',
+            link: '/contact',
+            variant: 'primary' as 'primary' | 'secondary' | 'ghostLight' | 'ghostDark',
+        },
+    ],
+};
+
+const industrialServices = {
+    eyebrow: 'Servicios Industriales',
+    headline: 'Desarrollo y Fabricación de Soluciones Industriales',
+    subheadline: 'Innovación, calidad y precisión en cada proyecto',
+    description:
+        'Ofrecemos el diseño y fabricación de estaciones de trabajo, estructuras de soporte, carros de almacenamiento y transporte, mesas de inspección, así como soluciones en estructuras de perfil de aluminio o PTR. Nos adaptamos a tus requerimientos técnicos y productivos, garantizando soluciones a medida con los más altos estándares de calidad.',
+    serviceList: [
+        'Carros de almacenamiento y transporte',
+        'Estructuras de perfil de aluminio o PTR',
+        'Mesas de inspección',
+    ],
+    images: [
+        { src: img6, alt: 'Carros de almacenamiento y transporte', colSpan: 2, rowSpan: 2 },
+        { src: img7, alt: 'Estructuras de perfil de aluminio o PTR', colSpan: 1, rowSpan: 1 },
+        { src: img8, alt: 'Mesas de inspección', colSpan: 2, rowSpan: 1 },
+    ],
+    buttons: [
+        {
+            text: 'Solicitar Cotización',
+            link: '/contact',
+            variant: 'primary' as 'primary' | 'secondary' | 'ghostLight' | 'ghostDark',
+        },
+    ],
+};
+
+const softwareDevelopmentServices = {
+    eyebrow: 'Servicios de Desarrollo de Software y Soporte Técnico Informático',
+    headline: 'Soluciones Personalizadas para tu Empresa',
+    subheadline: 'Innovación, eficiencia y soporte continuo en cada proyecto',
+    description:
+        'Brindamos soluciones a medida para el desarrollo de software, incluyendo páginas web, aplicaciones web, APIs, bases de datos, sistemas de control de inventarios y más. Además, ofrecemos soporte técnico especializado en plataformas como Ignition & PLC, sistemas SCADA, así como mantenimiento preventivo y correctivo de PC y laptops, instalación de programas, impresoras y soporte remoto.',
+    serviceList: [
+        'Desarrollo de páginas web a la medida',
+        'Aplicaciones web',
+        'Desarrollo de APIs',
+        'Sistemas de control de inventarios a la medida',
+        'Integraciones con APIs externas y sistemas solicitados',
+        'Desarrollo de base de datos (SQL Server, PostgreSQL y MongoDB)',
+        'Plataforma Ignition & PLC',
+        'Sistemas SCADA',
+        'Mantenimiento preventivo y correctivo de PC y laptops',
+        'Instalación de programas',
+        'Instalación de impresoras',
+        'Soporte remoto',
+    ],
+    images: [
+        { src: devWeb, alt: 'Desarrollo de páginas web', colSpan: 2, rowSpan: 2 },
+        { src: api, alt: 'Desarrollo de aplicaciones web', colSpan: 1, rowSpan: 1 },
+        { src: db, alt: 'Desarrollo de APIs y bases de datos', colSpan: 2, rowSpan: 1 },
+        { src: scada, alt: 'Sistemas SCADA y control de inventarios', colSpan: 1, rowSpan: 2 },
+        { src: soporte, alt: 'Mantenimiento y soporte técnico', colSpan: 2, rowSpan: 1 },
+        { src: software, alt: 'Arquitectura de software', colSpan: 1, rowSpan: 1 },
+    ],
+    buttons: [
+        {
+            text: 'Solicitar Asesoría',
+            link: '/contact',
+            variant: 'primary' as 'primary' | 'secondary' | 'ghostLight' | 'ghostDark',
+        },
+    ],
 };
 
 const mainCta = {
-    eyebrow: "Build Blocks",
-    title: "Ready-to-Use Components",
-    description: "Save development time with our pre-built, accessible components. Each one is designed to integrate seamlessly with your projects while maintaining excellent performance.",
+    eyebrow: 'Build Blocks',
+    title: 'Ready-to-Use Components',
+    description:
+        'Save development time with our pre-built, accessible components. Each one is designed to integrate seamlessly with your projects while maintaining excellent performance.',
     button: {
-        text: "View All Components",
-        link: "/components",
-        variant: "primary" as const,
-        target: "_self" as const
-    }
+        text: 'View All Components',
+        link: '/components',
+        variant: 'primary' as const,
+        target: '_self' as const,
+    },
 };
 
-
-const logosSection = {
-    eyebrow: "Our Clients",
-    logos: logoLists.main.logos
-}
-
 const faqsSection = {
-    eyebrow: "FAQs",
+    eyebrow: 'FAQs',
     title: 'Frequently Asked Questions',
     description: 'Find answers to common questions about our platform and services.',
-    faqs: faqLists.main.faqs
-}
-
-const recentPostsSection = {
-    eyebrow: "LATEST INSIGHTS",
-    title: " Learn From Our Experience",
-    description: "Explore our latest articles on Astro JS development, theme customization tips, and web performance best practices.",
-    button: {
-            text: "View All Posts",
-            link: "/blog",
-        variant: "primary" as const
-    }
-}
+    faqs: faqLists.main.faqs,
+};
 ---
 
 <Layout footerCta={FooterCta} title={seoTitle} description={seoDescription}>
-    <Hero content={heroContent} />
-    <Features content={featuresSection} padding="base" background="light" />
-    <RecentPosts content={recentPostsSection} background="base" padding="base" postsToShow={3} category="Theme Usage"/>
-    <SplitPanel content={styleGuideSection} imagePosition="right" background="light" padding="base" />
+    <section id="about">
+        <Hero content={heroContent} />
+    </section>
+
+    <section id="offer">
+        <Features content={offerSection} padding="base" background="light" />
+    </section>
+
+    <section id="plot">
+        <SplitPanel content={plotServices} imagePosition="left" background="dark" padding="base" />
+    </section>
+
+    <section id="design-services">
+        <SplitPanel content={designServices} imagePosition="right" background="base" padding="base" />
+    </section>
+
+    <section id="industrial-services">
+        <SplitPanel content={industrialServices} imagePosition="right" background="dark" padding="base" />
+    </section>
+
+    <section id="software-development">
+        <SplitPanel content={softwareDevelopmentServices} imagePosition="right" background="base" padding="base" />
+    </section>
+    <!-- <Logos content={logoLists} background="base" padding="base" /> -->
     <CtaBanner content={mainCta} variant="contained" background="light" paddingBottom="base" />
-    <Logos content={logosSection} background="base" padding='small'/>
-    <Stats content={sideBySideStats} background='dark' padding="base"/>
+    <!-- <Stats content={sideBySideStats} background="dark" padding="base" /> -->
     <Faqs content={faqsSection} background="base" padding="base" />
 </Layout>

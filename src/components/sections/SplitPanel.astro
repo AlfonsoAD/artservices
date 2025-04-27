@@ -10,10 +10,13 @@ interface Content {
     headline: string;
     subheadline?: string;
     description?: string;
-    image: {
+    materialList?: string[];
+    images: {
         src: string | any;
-        alt?: string;
-    };
+        alt: string;
+        colSpan: number;
+        rowSpan: number;
+    }[];
     buttons?: {
         text: string;
         link: string;
@@ -42,8 +45,7 @@ const {
     padding,
 } = Astro.props;
 
-const { eyebrow, headline, subheadline, description, image, buttons = [] } = content;
-const { src, alt = '' } = image;
+const { eyebrow, headline, subheadline, description, materialList = [], images, buttons = [] } = content;
 
 const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
 const bgColor = getBackgroundColor(background);
@@ -59,24 +61,32 @@ const textColor = getTextColor(background);
                 imagePosition === 'left' ? 'md:grid-cols-[1fr_1fr]' : '',
             ]}
         >
-            {/* Image Side */}
+            {/* Lado de la imagen */}
             {
                 imagePosition === 'left' && (
-                    <div class="relative aspect-[4/3] overflow-hidden rounded-[var(--border-radius-base)] border border-black">
-                        <Image
-                            {src}
-                            {alt}
-                            width={800}
-                            height={600}
-                            class="w-full h-full object-cover"
-                            quality={80}
-                            format="webp"
-                        />
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                        {images.map((image, index) => (
+                            <div
+                                class="relative aspect-square overflow-hidden rounded-[var(--border-radius-base)] border border-[var(--color-primary-dark)]"
+                                data-aos="fade-up"
+                                data-aos-delay={`${index * 100}`}
+                            >
+                                <Image
+                                    src={image.src}
+                                    alt={image.alt}
+                                    width={600}
+                                    height={550}
+                                    class="w-full h-full object-cover"
+                                    quality={80}
+                                    format="webp"
+                                />
+                            </div>
+                        ))}
                     </div>
                 )
             }
 
-            {/* Content Side */}
+            {/* Lado del contenido */}
             <div class:list={[textColor]}>
                 {eyebrow && <Eyebrow text={eyebrow} background={background} />}
                 <h2 class={textColor} data-aos="fade-up">{headline}</h2>
@@ -92,6 +102,19 @@ const textColor = getTextColor(background);
                         <p class:list={['mt-6 text-base opacity-90', textColor]} data-aos="fade-up">
                             {description}
                         </p>
+                    )
+                }
+
+                {
+                    materialList.length > 0 && (
+                        <ul class="mt-6 grid grid-cols-2 gap-x-4 gap-y-3" data-aos="fade-up">
+                            {materialList.map((item) => (
+                                <li class="flex items-center gap-2">
+                                    <span class="w-2 h-2 rounded-full bg-[var(--color-primary)]" />
+                                    <span>{item}</span>
+                                </li>
+                            ))}
+                        </ul>
                     )
                 }
 
@@ -112,23 +135,27 @@ const textColor = getTextColor(background);
                 }
             </div>
 
-            {/* Image Side (right position) */}
+            {/* Lado de la imagen (posición derecha) */}
             {
                 imagePosition === 'right' && (
-                    <div
-                        class="relative aspect-[4/3] overflow-hidden rounded-[var(--border-radius-base)] border border-black"
-                        data-aos="fade-up"
-                        data-aos-delay="100"
-                    >
-                        <Image
-                            {src}
-                            {alt}
-                            width={800}
-                            height={600}
-                            class="w-full h-full object-cover"
-                            quality={80}
-                            format="webp"
-                        />
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                        {images.map((image, index) => (
+                            <div
+                                class="relative aspect-square overflow-hidden rounded-[var(--border-radius-base)] border border-[var(--color-primary-dark)]"
+                                data-aos="fade-up"
+                                data-aos-delay={`${index * 100}`}
+                            >
+                                <Image
+                                    src={image.src}
+                                    alt={image.alt}
+                                    width={550}
+                                    height={550}
+                                    class="w-full h-full object-cover"
+                                    quality={80}
+                                    format="webp"
+                                />
+                            </div>
+                        ))}
                     </div>
                 )
             }

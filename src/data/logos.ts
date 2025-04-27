@@ -18,7 +18,6 @@ export interface LogoList {
     logos: Logo[];
 }
 
-// Example logo lists with imported images
 export const logoLists: Record<string, LogoList> = {
     main: {
         id: 'main',

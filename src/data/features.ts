@@ -1,4 +1,4 @@
-import { Zap, Shield, Heart, Coffee, Smile, Type, TabletSmartphone, CodeXml } from 'lucide-astro';
+import { Zap, TabletSmartphone, CodeXml, Computer, Cog, Spline, HandPlatter } from 'lucide-astro';
 
 // Define the LucideIcon type based on the structure of Lucide icons
 type LucideIcon = typeof Zap;
@@ -14,61 +14,46 @@ export interface FeatureList {
     features: Feature[];
 }
 
-// Example feature lists
 export const featureLists: Record<string, FeatureList> = {
     main: {
         id: 'main',
         features: [
             {
-                icon: Zap,
-                title: 'Lightning Fast Performance',
-                description: 'Optimized for speed and performance'
+                icon: Spline,
+                title: 'Maquinados de Precisión',
+                description:
+                    'Fabricación de piezas especializadas con materiales de alta calidad como Nylamid, Bronce, Acero 4140, D2/A2, Inoxidable y Delrin.',
             },
             {
-                icon: Shield,
-                title: 'SEO Optimized Structure',
-                description: 'Built with SEO best practices in mind'
+                icon: Cog,
+                title: 'Diseño y Desarrollo',
+                description:
+                    'Diseño de piezas, estructuras y estaciones de trabajo funcionales, adaptadas a los requerimientos de cada proyecto.',
             },
             {
-                icon: TabletSmartphone,
-                title: 'Responsive by Default',
-                description: 'Mobile-friendly out of the box'
-            },
-            {
-                icon: Smile,
-                title: 'Easy Customization',
-                description: 'Customize the theme to your liking'
-            },
-            {
-                icon: Type,
-                title: 'TypeScript Support',
-                description: 'Built with TypeScript in mind'
+                icon: HandPlatter,
+                title: 'Servicios Industriales',
+                description:
+                    'Soldadura, ensamblado de estructuras, integraciones mecánicas y eléctricas para fortalecer tu infraestructura industrial.',
             },
             {
                 icon: CodeXml,
-                title: 'Minimal Dependencies',
-                description: 'Keep your project lightweight'
-            }
-        ]
+                title: 'Desarrollo de Software',
+                description:
+                    'Soluciones informáticas a la medida, incluyendo desarrollo de software, aplicaciones web, así como integración de API´s y sistemas  .',
+            },
+            {
+                icon: Computer,
+                title: 'Servicos IT y Soporte Técnico',
+                description:
+                    'Soporte técnico y mantenimiento de sistemas informáticos, así como la implementación de soluciones tecnológicas para optimizar procesos.',
+            },
+            {
+                icon: TabletSmartphone,
+                title: 'Integraciones Personalizadas',
+                description:
+                    'Integramos componentes, sistemas y procesos para mejorar la eficiencia operativa y reducir tiempos de producción.',
+            },
+        ],
     },
-    secondary: {
-        id: 'secondary',
-        features: [
-            {
-                icon: Heart,
-                title: 'Made with Love',
-                description: 'Crafted with attention to detail'
-            },
-            {
-                icon: Coffee,
-                title: 'Always Fresh',
-                description: 'Regular updates and improvements'
-            },
-            {
-                icon: Smile,
-                title: 'User Friendly',
-                description: 'Intuitive and easy to use'
-            }
-        ]
-    }
 };
