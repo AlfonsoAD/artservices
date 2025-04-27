@@ -7,8 +7,6 @@ import { featureLists } from '@data/features';
 import CtaBanner from '@components/sections/CtaBanner.astro';
 import Faqs from '@components/sections/Faqs.astro';
 import { faqLists } from '@data/faqs';
-import Logos from '@components/sections/Logos.astro';
-import { logoLists } from '@data/logos';
 // images
 import heroImage from '../assets/images/home/default-hero-2.jpg';
 import nylamid from '../assets/images/home/m-nylamid.jpeg';
@@ -46,27 +44,9 @@ const heroContent = {
             link: '/contact',
             target: '_self',
         },
-        {
-            text: 'Conoce Más',
-            link: '/servicios',
-            target: '_self',
-        },
     ],
     backgroundImage: heroImage,
     overlayOpacity: 0.5,
-};
-
-const FooterCta = {
-    eyebrow: 'Join The Community',
-    title: ' Start Building With Titan Core Today',
-    description:
-        "Titan Core is open-source and constantly improving. Join our community of developers to contribute, get support, or showcase what you've built.",
-    hideCta: false,
-    button: {
-        text: 'Download Titan Core',
-        link: 'https://github.com/rspisarski/titan-core',
-        target: '_blank',
-    },
 };
 
 const offerSection = {
@@ -75,11 +55,6 @@ const offerSection = {
     description:
         'Ofrecemos soluciones especializadas que se adaptan a las necesidades específicas de cada empresa. Desde maquinados de alta precisión hasta soporte técnico de IT, nuestro compromiso es impulsar tu productividad con servicios de calidad, confiabilidad y eficiencia.',
     features: featureLists.main.features,
-    button: {
-        text: 'Descubre Más',
-        link: '/services',
-        variant: 'primary' as const,
-    },
 };
 
 const plotServices = {
@@ -122,7 +97,7 @@ const designServices = {
     ],
     buttons: [
         {
-            text: 'Solicitar Asesoría',
+            text: 'Solicitar Cotización',
             link: '/contact',
             variant: 'primary' as 'primary' | 'secondary' | 'ghostLight' | 'ghostDark',
         },
@@ -184,7 +159,7 @@ const softwareDevelopmentServices = {
     ],
     buttons: [
         {
-            text: 'Solicitar Asesoría',
+            text: 'Solicitar Cotización',
             link: '/contact',
             variant: 'primary' as 'primary' | 'secondary' | 'ghostLight' | 'ghostDark',
         },
@@ -204,11 +179,16 @@ const mainCta = {
     },
 };
 
-const faqsSection = {
-    eyebrow: 'FAQs',
-    title: 'Frequently Asked Questions',
-    description: 'Find answers to common questions about our platform and services.',
-    faqs: faqLists.main.faqs,
+const FooterCta = {
+    eyebrow: 'Únete a nosotros',
+    title: 'Comienza a trabajar con Art Services hoy',
+    description: 'Somos una empresa innovadora y en constante crecimiento.',
+    hideCta: false,
+    button: {
+        text: 'Contáctanos',
+        link: '/contact',
+        target: '_self',
+    },
 };
 ---
 
@@ -236,8 +216,6 @@ const faqsSection = {
     <section id="software-development">
         <SplitPanel content={softwareDevelopmentServices} imagePosition="right" background="base" padding="base" />
     </section>
-    <!-- <Logos content={logoLists} background="base" padding="base" /> -->
+
     <CtaBanner content={mainCta} variant="contained" background="light" paddingBottom="base" />
-    <!-- <Stats content={sideBySideStats} background="dark" padding="base" /> -->
-    <Faqs content={faqsSection} background="base" padding="base" />
 </Layout>

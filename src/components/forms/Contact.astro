@@ -1,134 +1,86 @@
 ---
-import Button from "@components/ui/Button.astro";
-import Input from "@components/ui/form/Input.astro";
-import Textarea from "@components/ui/form/Textarea.astro";
-import Radio from "@components/ui/form/Radio.astro";
-import Checkbox from "@components/ui/form/Checkbox.astro";
-import Select from "@components/ui/form/Select.astro";
-
-const hearAboutOptions = [
-    { label: "Search Engine", value: "search" },
-    { label: "Social Media", value: "social" },
-    { label: "Friend/Colleague", value: "referral" },
-    { label: "Other", value: "other" }
-];
-
-const interestOptions = [
-    { label: "Web Development", value: "web" },
-    { label: "Mobile Development", value: "mobile" },
-    { label: "Design Services", value: "design" },
-    { label: "Consulting", value: "consulting" }
-];
-
-const serviceOptions = [
-    { label: "Website Development", value: "website" },
-    { label: "Mobile App Development", value: "mobile" },
-    { label: "UI/UX Design", value: "design" },
-    { label: "Digital Marketing", value: "marketing" },
-    { label: "Consulting", value: "consulting" }
-];
-
-const budgetOptions = [
-    { label: "$5,000 - $10,000", value: "5-10k" },
-    { label: "$10,000 - $25,000", value: "10-25k" },
-    { label: "$25,000 - $50,000", value: "25-50k" },
-    { label: "$50,000+", value: "50k+" }
-];
+import Input from '@components/ui/form/Input.astro';
+import Textarea from '@components/ui/form/Textarea.astro';
 
 const formBackground = 'light';
 ---
-<form class="space-y-6 bg-white p-6 rounded-lg">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <Input
-        label="Name"
-        id="name"
-        name="name"
-        required
-        background={formBackground}
-        />
-        <Input
-        label="Email"
-        type="email"
-        id="email"
-        name="email"
-        required
-        background={formBackground}
-        />
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-    <Input
-        label="Phone"
-        type="tel"
-        id="phone"
-        name="phone"
-        background={formBackground}
-    />
-    <Input
-        label="Company"
-        id="company"
-        name="company"
-        background={formBackground}
-    />
-    </div>
 
+<form id="contact-form" class="space-y-6 bg-white p-6 rounded-lg" novalidate>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <Radio
-            label="How did you hear about us?"
-            id="hear-about"
-            name="hear-about"
-            options={hearAboutOptions}
-            required
-            background={formBackground}
-        />
-    <Checkbox
-        label="Areas of Interest"
-        id="interests"
-        name="interests"
-        options={interestOptions}
-        background={formBackground}
-    />
+        <Input label="Nombre" id="name" name="name" required background={formBackground} />
+        <Input label="Correo electrónico" type="email" id="email" name="email" required background={formBackground} />
     </div>
-    
-    <Textarea
-        label="Message"
-        id="message"
-        name="message"
-        required
-        background={formBackground}
-    />
-    
-    <Checkbox
-        label="I agree to the terms and conditions"
-        id="terms"
-        name="terms"
-        required
-        background={formBackground}
-    />
-    
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <Select
-            label="What service are you interested in?"
-            id="service"
-            name="service"
-            options={serviceOptions}
-            required
-            placeholder="Choose a service"
-            background={formBackground}
-        />
-        <Select
-            label="Budget Range"
-            id="budget"
-            name="budget"
-            options={budgetOptions}
-            required
-            placeholder="Select your budget"
-            background={formBackground}
-        />
-    </div>
-
-
-
-    <div class="mt-6">
-        <Button>Submit</Button>
+    <Textarea label="Mensaje" id="message" name="message" required background={formBackground} />
+    <div id="form-error" class="text-red-600 text-sm my-2"></div>
+    <div class="mt-6 flex justify-end">
+        <button
+            type="submit"
+            id="send"
+            class="h-10 px-4 py-2 text-small group relative overflow-hidden items-center justify-center rounded-border-small font-medium transition-all duration-300 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 rounded-md flex gap-2 bg-primary text-white hover:bg-primary-light focus-visible:ring-primary hover:ring-2 hover:ring-primary hover:ring-offset-2"
+            >Enviar</button
+        >
     </div>
 </form>
+<script>
+    import emailjs from '@emailjs/browser';
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const form = document.getElementById('contact-form');
+        const errorDiv = document.getElementById('form-error');
+        if (!form) return;
+
+        const validateEmail = (email: string) => {
+            // Regex simple para validar emails
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        };
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+
+            errorDiv!.textContent = '';
+
+            const formData = new FormData(form as HTMLFormElement);
+
+            // Validaciones básicas
+            const name = formData.get('name')?.toString().trim();
+            const email = formData.get('email')?.toString().trim();
+            const message = formData.get('message')?.toString().trim();
+
+            if (!name) {
+                errorDiv!.textContent = 'El nombre es obligatorio.';
+                return;
+            }
+            if (!email || !validateEmail(email)) {
+                errorDiv!.textContent = 'El correo electrónico no es válido.';
+                return;
+            }
+            if (!message) {
+                errorDiv!.textContent = 'El mensaje es obligatorio.';
+                return;
+            }
+
+            // Parámetros para EmailJS
+            const templateParams = {
+                title: 'Nuevo mensaje para cotización',
+                name,
+                email,
+                message,
+            };
+
+            try {
+                await emailjs.send(
+                    'service_hxb4fjq', // Service ID (público)
+                    'template_ue4mbci', // Template ID
+                    templateParams,
+                    'wTf7-7J0PN4-wB1M7' // Public Key (puede ir en frontend)
+                );
+                alert('¡Mensaje enviado con éxito!');
+                // form.reset();
+            } catch (error) {
+                errorDiv!.textContent = 'Hubo un error al enviar el mensaje. Intenta nuevamente.';
+                console.error('Error de EmailJS:', error);
+            }
+        });
+    });
+</script>
