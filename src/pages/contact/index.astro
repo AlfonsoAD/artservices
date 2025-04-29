@@ -7,9 +7,15 @@ const heroContent = {
     title: 'Contáctanos',
     description: 'Para más información sobre nuestros servicios',
 };
+
+const footer = {
+    title: 'ART Services',
+    description: 'Ofrecemos servicios de alta calidad para satisfacer tus necesidades.',
+    hideCta: false,
+};
 ---
 
-<Layout title="Contacto" description="Para más información sobre nuestros servicios">
+<Layout title="Contacto" description="Para más información sobre nuestros servicios" footerCta={footer}>
     <InnerHero content={heroContent} />
     <ContactInfo background="base" padding="base" />
 </Layout>

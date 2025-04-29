@@ -2,8 +2,8 @@ export const siteConfig = {
     companyName: 'ART Services',
     siteUrl: 'https://titan-core.com',
     Socials: {
-        Email: 'gerardo.gallegos@artservices.com.mx',
-        Phone: '+52 867 249 7230',
+        Email: '@alberto.cardenas@artservices.com.mx',
+        // Phone: '+52 867 249 7230',
     },
 };
 

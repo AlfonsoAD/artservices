@@ -1,19 +1,21 @@
 // src/data/menu.ts
 
 export const headerMenu = [
-    { name: 'Nosotros', link: '#about' },
-    { name: 'Oferta', link: '#offer' },
-    { name: 'Maquinados', link: '#plot' },
-    { name: 'Servicio de Diseño', link: '#design-services' },
-    { name: 'Servicio Industriales', link: '#industrial-services' },
-    { name: 'IT', link: '#software-development' },
+    { name: 'Inicio', link: '/', showInContact: true },
+    { name: 'Nosotros', link: '#about', showInContact: false },
+    { name: 'Oferta', link: '#offer', showInContact: false },
+    { name: 'Maquinados', link: '#plot', showInContact: false },
+    { name: 'Servicio de Diseño', link: '#design-services', showInContact: false },
+    { name: 'Servicio Industriales', link: '#industrial-services', showInContact: false },
+    { name: 'IT', link: '#software-development', showInContact: false },
 ];
 
 export const footerMenu = [
-    { name: 'Nosotros', link: '#about' },
-    { name: 'Oferta', link: '#offer' },
-    { name: 'Maquinados', link: '#plot' },
-    { name: 'Servicio de Diseño', link: '#design-services' },
-    { name: 'Servicio Industriales', link: '#industrial-services' },
-    { name: 'IT', link: '#software-development' },
+    { name: 'Inicio', link: '/', showInContact: true },
+    { name: 'Nosotros', link: '#about', showInContact: false },
+    { name: 'Oferta', link: '#offer', showInContact: false },
+    { name: 'Maquinados', link: '#plot', showInContact: false },
+    { name: 'Servicio de Diseño', link: '#design-services', showInContact: false },
+    { name: 'Servicio Industriales', link: '#industrial-services', showInContact: false },
+    { name: 'IT', link: '#software-development', showInContact: false },
 ];

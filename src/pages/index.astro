@@ -4,9 +4,8 @@ import Hero from '@components/sections/Hero.astro';
 import SplitPanel from '@components/sections/SplitPanel.astro';
 import Features from '@components/sections/Features.astro';
 import { featureLists } from '@data/features';
-import CtaBanner from '@components/sections/CtaBanner.astro';
-import Faqs from '@components/sections/Faqs.astro';
-import { faqLists } from '@data/faqs';
+import Integrations, { type Logo } from '@components/sections/Integrations.astro';
+
 // images
 import heroImage from '../assets/images/home/default-hero-2.jpg';
 import nylamid from '../assets/images/home/m-nylamid.jpeg';
@@ -23,12 +22,28 @@ import img5 from '../assets/images/home/img-5.png';
 import img6 from '../assets/images/home/img-6.png';
 import img7 from '../assets/images/home/img-7.png';
 import img8 from '../assets/images/home/img-8.png';
-import devWeb from '../assets/images/home/dev-web.jpg';
-import api from '../assets/images/home/api.jpg';
-import db from '../assets/images/home/db.jpg';
-import scada from '../assets/images/home/scada.png';
-import soporte from '../assets/images/home/soporte.png';
-import software from '../assets/images/home/software.png';
+// import devWeb from '../assets/images/home/dev-web.jpg';
+// import api from '../assets/images/home/api.jpg';
+// import db from '../assets/images/home/db.jpg';
+// import scada from '../assets/images/home/scada.png';
+// import soporte from '../assets/images/home/soporte.png';
+// import software from '../assets/images/home/software.png';
+import automation from '../assets/images/home/automation.png';
+import factoryTalk from '../assets/images/home/factory-talk.png';
+import ignition from '../assets/images/home/ignition.webp';
+import keyence from '../assets/images/home/keyence.png';
+import rockwell from '../assets/images/home/rockwell-automation.png';
+import siemens from '../assets/images/home/siemens.png';
+import angular from '../assets/images/home/angular.png';
+import astro from '../assets/images/home/astro.png';
+import csharp from '../assets/images/home/csharp.webp';
+import go from '../assets/images/home/go.png';
+import nodejs from '../assets/images/home/nodejs.png';
+import postgresql from '../assets/images/home/postgresql.webp';
+import python from '../assets/images/home/python.png';
+import sqls from '../assets/images/home/sqls.png';
+import tailwind from '../assets/images/home/tailwind.png';
+import ts from '../assets/images/home/ts.webp';
 
 const seoTitle = 'ART Services';
 const seoDescription =
@@ -131,8 +146,8 @@ const industrialServices = {
 
 const softwareDevelopmentServices = {
     eyebrow: 'Servicios de Desarrollo de Software y Soporte Técnico Informático',
-    headline: 'Soluciones Personalizadas para tu Empresa',
-    subheadline: 'Innovación, eficiencia y soporte continuo en cada proyecto',
+    headline: 'Personalizadas para tu Empresa',
+    subheadline: 'Innovación, eficiencia y soporte continuo en cada proyecto con las mejores tecnologías',
     description:
         'Brindamos soluciones a medida para el desarrollo de software, incluyendo páginas web, aplicaciones web, APIs, bases de datos, sistemas de control de inventarios y más. Además, ofrecemos soporte técnico especializado en plataformas como Ignition & PLC, sistemas SCADA, así como mantenimiento preventivo y correctivo de PC y laptops, instalación de programas, impresoras y soporte remoto.',
     serviceList: [
@@ -142,20 +157,24 @@ const softwareDevelopmentServices = {
         'Sistemas de control de inventarios a la medida',
         'Integraciones con APIs externas y sistemas solicitados',
         'Desarrollo de base de datos (SQL Server, PostgreSQL y MongoDB)',
-        'Plataforma Ignition & PLC',
-        'Sistemas SCADA',
+        // 'Plataforma Ignition & PLC',
+        // 'Sistemas SCADA',
         'Mantenimiento preventivo y correctivo de PC y laptops',
         'Instalación de programas',
         'Instalación de impresoras',
         'Soporte remoto',
     ],
     images: [
-        { src: devWeb, alt: 'Desarrollo de páginas web', colSpan: 2, rowSpan: 2 },
-        { src: api, alt: 'Desarrollo de aplicaciones web', colSpan: 1, rowSpan: 1 },
-        { src: db, alt: 'Desarrollo de APIs y bases de datos', colSpan: 2, rowSpan: 1 },
-        { src: scada, alt: 'Sistemas SCADA y control de inventarios', colSpan: 1, rowSpan: 2 },
-        { src: soporte, alt: 'Mantenimiento y soporte técnico', colSpan: 2, rowSpan: 1 },
-        { src: software, alt: 'Arquitectura de software', colSpan: 1, rowSpan: 1 },
+        { src: angular, alt: 'Angular', colSpan: 2, rowSpan: 2 },
+        { src: astro, alt: 'Astro', colSpan: 1, rowSpan: 1 },
+        { src: csharp, alt: 'C#', colSpan: 2, rowSpan: 1 },
+        { src: go, alt: 'Go', colSpan: 1, rowSpan: 2 },
+        { src: nodejs, alt: 'Node.js', colSpan: 2, rowSpan: 1 },
+        { src: postgresql, alt: 'PostgreSQL', colSpan: 1, rowSpan: 1 },
+        { src: python, alt: 'Python', colSpan: 2, rowSpan: 1 },
+        { src: sqls, alt: 'SQL Server', colSpan: 1, rowSpan: 2 },
+        { src: tailwind, alt: 'Tailwind CSS', colSpan: 2, rowSpan: 1 },
+        { src: ts, alt: 'TypeScript', colSpan: 1, rowSpan: 1 },
     ],
     buttons: [
         {
@@ -164,19 +183,6 @@ const softwareDevelopmentServices = {
             variant: 'primary' as 'primary' | 'secondary' | 'ghostLight' | 'ghostDark',
         },
     ],
-};
-
-const mainCta = {
-    eyebrow: 'Build Blocks',
-    title: 'Ready-to-Use Components',
-    description:
-        'Save development time with our pre-built, accessible components. Each one is designed to integrate seamlessly with your projects while maintaining excellent performance.',
-    button: {
-        text: 'View All Components',
-        link: '/components',
-        variant: 'primary' as const,
-        target: '_self' as const,
-    },
 };
 
 const FooterCta = {
@@ -190,6 +196,16 @@ const FooterCta = {
         target: '_self',
     },
 };
+
+const logos: Logo[] = [
+    { src: automation, alt: 'Automation', link: '' },
+    { src: factoryTalk, alt: 'Factory Talk', link: '' },
+    { src: ignition, alt: 'Ignition', link: '' },
+    { src: keyence, alt: 'Keyence', link: '' },
+    { src: siemens, alt: 'Siemens', link: '' },
+    { src: rockwell, alt: 'Rockwell Automation', link: '' },
+    // { src: studio5000.src, alt: 'Studio 5000', link: '' },
+];
 ---
 
 <Layout footerCta={FooterCta} title={seoTitle} description={seoDescription}>
@@ -214,8 +230,22 @@ const FooterCta = {
     </section>
 
     <section id="software-development">
-        <SplitPanel content={softwareDevelopmentServices} imagePosition="right" background="base" padding="base" />
+        <SplitPanel
+            content={softwareDevelopmentServices}
+            imagePosition="right"
+            background="base"
+            padding="base"
+            isDevSection
+        />
     </section>
 
-    <CtaBanner content={mainCta} variant="contained" background="light" paddingBottom="base" />
+    <Integrations
+        content={{
+            eyebrow: 'Integraciones',
+            title: 'Conecta con tus herramientas favoritas',
+            description: 'Nuestra plataforma se integra fácilmente con las principales empresas del sector.',
+            logos: logos,
+        }}
+        background="dark"
+    />
 </Layout>

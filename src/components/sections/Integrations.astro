@@ -1,0 +1,111 @@
+---
+import { getBackgroundColor, getTextColor, getPaddingClass, getHeadlineColor } from '@utils/styleUtils';
+import type { ThemeColor, PaddingSize } from '@utils/styleUtils';
+import Eyebrow from '@components/ui/Eyebrow.astro';
+import { Image } from 'astro:assets';
+
+export interface Logo {
+    src: string | any;
+    alt: string;
+    link?: string;
+}
+
+export interface Props {
+    content: {
+        eyebrow?: string;
+        title: string;
+        description?: string;
+        logos: Logo[];
+    };
+    variant?: 'contained' | 'full-width';
+    background?: ThemeColor;
+    padding?: PaddingSize;
+    paddingTop?: PaddingSize;
+    paddingBottom?: PaddingSize;
+}
+
+const {
+    content: { eyebrow, title, description, logos },
+    variant = 'contained',
+    background = 'dark',
+    padding,
+    paddingTop,
+    paddingBottom,
+} = Astro.props;
+
+const bgColor = getBackgroundColor(background);
+const textColor = getTextColor(background);
+const headlineColor = getHeadlineColor(background);
+const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
+
+const containerBgColors = {
+    white: 'bg-background-alt',
+    alt: 'bg-white',
+    dark: 'bg-background-dark/50',
+};
+
+const containerBgColor = containerBgColors[background as keyof typeof containerBgColors];
+---
+
+<section class:list={[bgColor, paddingClass]}>
+    <div class:list={[variant === 'contained' ? 'site-container px-4' : 'px-4', 'text-center']}>
+        <div
+            class:list={[
+                'mx-auto',
+                variant === 'contained' ? 'max-w-3xl rounded-xl p-12' : 'max-w-4xl',
+                variant === 'contained' && containerBgColor,
+            ]}
+        >
+            {eyebrow && <Eyebrow text={eyebrow} background={background} />}
+            <h2 class:list={[headlineColor]} data-aos="fade-up">
+                {title}
+            </h2>
+            {
+                description && (
+                    <p class:list={['mt-4', textColor, 'opacity-90']} data-aos="fade-up" data-aos-delay="100">
+                        {description}
+                    </p>
+                )
+            }
+
+            <div
+                class="mt-8 grid grid-cols-2 sm:grid-cols-3 gap-6 items-center justify-center"
+                data-aos="fade-up"
+                data-aos-delay="200"
+            >
+                {
+                    logos.map((logo) =>
+                        logo.link ? (
+                            <a
+                                href={logo.link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="flex justify-center items-center"
+                            >
+                                <Image
+                                    width={250}
+                                    height={250}
+                                    src={logo.src}
+                                    alt={logo.alt}
+                                    class="h-12 max-h-12 object-contain grayscale hover:grayscale-0 transition duration-200"
+                                    loading="lazy"
+                                />
+                            </a>
+                        ) : (
+                            <div class="flex justify-center items-center">
+                                <Image
+                                    width={250}
+                                    height={250}
+                                    src={logo.src}
+                                    alt={logo.alt}
+                                    class="h-12 max-h-12 object-contain grayscale hover:grayscale-0 transition duration-200"
+                                    loading="lazy"
+                                />
+                            </div>
+                        )
+                    )
+                }
+            </div>
+        </div>
+    </div>
+</section>

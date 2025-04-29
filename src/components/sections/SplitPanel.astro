@@ -16,6 +16,7 @@ interface Content {
         alt: string;
         colSpan: number;
         rowSpan: number;
+        link?: string;
     }[];
     buttons?: {
         text: string;
@@ -33,6 +34,7 @@ export interface Props {
     paddingTop?: PaddingSize;
     paddingBottom?: PaddingSize;
     padding?: PaddingSize;
+    isDevSection?: boolean;
 }
 
 const {
@@ -43,6 +45,7 @@ const {
     paddingTop,
     paddingBottom,
     padding,
+    isDevSection = false,
 } = Astro.props;
 
 const { eyebrow, headline, subheadline, description, materialList = [], images, buttons = [] } = content;
@@ -63,7 +66,7 @@ const textColor = getTextColor(background);
         >
             {/* Lado de la imagen */}
             {
-                imagePosition === 'left' && (
+                imagePosition === 'left' && !isDevSection && (
                     <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
                         {images.map((image, index) => (
                             <div
@@ -137,7 +140,7 @@ const textColor = getTextColor(background);
 
             {/* Lado de la imagen (posición derecha) */}
             {
-                imagePosition === 'right' && (
+                imagePosition === 'right' && !isDevSection && (
                     <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
                         {images.map((image, index) => (
                             <div
@@ -154,6 +157,37 @@ const textColor = getTextColor(background);
                                     quality={80}
                                     format="webp"
                                 />
+                            </div>
+                        ))}
+                    </div>
+                )
+            }
+
+            {
+                isDevSection && (
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 items-center">
+                        {images.map((brand) => (
+                            <div class="md:grayscale hover:grayscale-0 hover:scale-110 transition flex items-center">
+                                <a href={brand.link} target="_blank" rel="noopener noreferrer">
+                                    <Image
+                                        src={brand.src}
+                                        alt={brand.alt}
+                                        width={90}
+                                        height={90}
+                                        class="object-cover"
+                                        quality={90}
+                                        format="webp"
+                                        loading="lazy"
+                                        decoding="async"
+                                        data-aos="fade-up"
+                                        data-aos-delay="100"
+                                        data-aos-duration="1000"
+                                        data-aos-easing="ease-in-out"
+                                        data-aos-once="true"
+                                        data-aos-anchor-placement="top-bottom"
+                                        data-aos-offset="200"
+                                    />
+                                </a>
                             </div>
                         ))}
                     </div>

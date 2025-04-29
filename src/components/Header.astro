@@ -1,7 +1,7 @@
 ---
 import { headerMenu } from '@data/menu';
 import Logo from '@components/Logo.astro';
-import { Menu, X, ChevronDown } from 'lucide-astro';
+import { Menu, X } from 'lucide-astro';
 import Button from '@components/ui/Button.astro';
 
 const ctaButton = {
@@ -19,6 +19,8 @@ const isCurrentPage = (link: string) => {
     }
     return currentPath.startsWith(link);
 };
+
+const currentPathIsContact = currentPath === '/contact' || currentPath.startsWith('/contact/');
 ---
 
 <header class="fixed top-0 z-50 w-full left-0">
@@ -29,24 +31,26 @@ const isCurrentPage = (link: string) => {
                 {/* Desktop Menu */}
                 <ul class="hidden lg:flex lg:gap-8 items-center">
                     {
-                        headerMenu.map((item, index) => (
-                            <li class="relative group">
-                                <div class="flex items-center gap-1">
-                                    <a
-                                        href={item.link}
-                                        class:list={[
-                                            'text-small font-medium rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-nav-text-active',
-                                            isCurrentPage(item.link)
-                                                ? 'text-nav-text-current font-semibold'
-                                                : 'text-nav-text hover:text-nav-text-hover',
-                                        ]}
-                                        aria-current={isCurrentPage(item.link) ? 'page' : undefined}
-                                    >
-                                        {item.name}
-                                    </a>
-                                </div>
-                            </li>
-                        ))
+                        headerMenu
+                            .filter((item) => (currentPathIsContact ? item.showInContact : !item.showInContact))
+                            .map((item) => (
+                                <li class="relative group">
+                                    <div class="flex items-center gap-1">
+                                        <a
+                                            href={item.link}
+                                            class:list={[
+                                                'text-small font-medium rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-nav-text-active',
+                                                isCurrentPage(item.link)
+                                                    ? 'text-nav-text-current font-semibold'
+                                                    : 'text-nav-text hover:text-nav-text-hover',
+                                            ]}
+                                            aria-current={isCurrentPage(item.link) ? 'page' : undefined}
+                                        >
+                                            {item.name}
+                                        </a>
+                                    </div>
+                                </li>
+                            ))
                     }
                 </ul>
 
@@ -72,26 +76,28 @@ const isCurrentPage = (link: string) => {
                 >
                     <ul class="flex flex-col gap-4">
                         {
-                            headerMenu.map((item) => (
-                                <li>
-                                    <div class="text-white">
-                                        <div class="flex items-center justify-between">
-                                            <a
-                                                href={item.link}
-                                                class:list={[
-                                                    'py-1 rounded-md focus:outline-none focus:ring-2 focus:ring-nav-mobile-text-active',
-                                                    isCurrentPage(item.link)
-                                                        ? 'text-nav-mobile-text-current font-semibold'
-                                                        : 'text-nav-mobile-text hover:text-nav-mobile-text-hover',
-                                                ]}
-                                                aria-current={isCurrentPage(item.link) ? 'page' : undefined}
-                                            >
-                                                {item.name}
-                                            </a>
+                            headerMenu
+                                .filter((item) => item.showInContact)
+                                .map((item) => (
+                                    <li>
+                                        <div class="text-white">
+                                            <div class="flex items-center justify-between">
+                                                <a
+                                                    href={item.link}
+                                                    class:list={[
+                                                        'py-1 rounded-md focus:outline-none focus:ring-2 focus:ring-nav-mobile-text-active',
+                                                        isCurrentPage(item.link)
+                                                            ? 'text-nav-mobile-text-current font-semibold'
+                                                            : 'text-nav-mobile-text hover:text-nav-mobile-text-hover',
+                                                    ]}
+                                                    aria-current={isCurrentPage(item.link) ? 'page' : undefined}
+                                                >
+                                                    {item.name}
+                                                </a>
+                                            </div>
                                         </div>
-                                    </div>
-                                </li>
-                            ))
+                                    </li>
+                                ))
                         }
                     </ul>
 

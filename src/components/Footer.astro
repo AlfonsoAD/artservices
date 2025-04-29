@@ -15,18 +15,18 @@ interface Props {
         title: string;
         description: string;
         hideCta: boolean;
-        button: ButtonProps;
+        button?: ButtonProps;
     };
 }
 
 const { footerCta } = Astro.props;
 
 const defaultCta = {
-    title: 'Ready to get started?',
-    description: 'Join us today and transform your digital presence with our innovative solutions.',
+    title: 'ART Services',
+    description: 'Transformamos tu visión en realidad',
     hideCta: false,
     button: {
-        text: 'Contact Us',
+        text: 'Contáctanos',
         link: '/contact',
         target: '_self',
     },
@@ -34,6 +34,9 @@ const defaultCta = {
 
 const cta = footerCta || defaultCta;
 const currentYear = new Date().getFullYear();
+
+const currentPath = Astro.url.pathname;
+const currentPathIsContact = currentPath === '/contact' || currentPath.startsWith('/contact/');
 ---
 
 <footer class={`bg-black text-white pb-small ${cta.hideCta ? 'pt-large' : ''}`}>
@@ -47,16 +50,18 @@ const currentYear = new Date().getFullYear();
                     <p class="text-white mb-6 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
                         {cta.description}
                     </p>
-                    <Button
-                        href={cta.button.link}
-                        variant="ghostLight"
-                        size="lg"
-                        data-aos="fade-up"
-                        data-aos-delay="200"
-                        {...(cta.button.target && { target: cta.button.target })}
-                    >
-                        {cta.button.text}
-                    </Button>
+                    {cta.button && cta.button.link && (
+                        <Button
+                            href={cta.button.link}
+                            variant="ghostLight"
+                            size="lg"
+                            data-aos="fade-up"
+                            data-aos-delay="200"
+                            {...(cta.button.target && { target: cta.button.target })}
+                        >
+                            {cta.button.text}
+                        </Button>
+                    )}
                 </div>
             )
         }
@@ -72,13 +77,15 @@ const currentYear = new Date().getFullYear();
                 <nav>
                     <ul class="grid grid-cols-2 grid-rows-3">
                         {
-                            footerMenu.map((item) => (
-                                <li>
-                                    <a href={item.link} class="text-body-dark hover:text-white transition-colors">
-                                        {item.name}
-                                    </a>
-                                </li>
-                            ))
+                            footerMenu
+                                .filter((item) => (currentPathIsContact ? item.showInContact : !item.showInContact))
+                                .map((item) => (
+                                    <li>
+                                        <a href={item.link} class="text-body-dark hover:text-white transition-colors">
+                                            {item.name}
+                                        </a>
+                                    </li>
+                                ))
                         }
                     </ul>
                 </nav>
